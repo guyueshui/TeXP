@@ -1,0 +1,290 @@
+\RequirePackage{silence}
+\WarningFilter{hyperref}{Token not allowed}
+\WarningFilter{microtype}{tracking amount}
+\WarningFilter{chessfss}{\comment already}
+
+% LaTeX: More Than Just Academic Papers and Journals
+%
+% Copyright Lim Lian Tze 2011-2016 (liantze@gmail.com)
+% Beamer presentation slides for a talk at the Malaysian Open Source Conference
+% 2011 (MOSC 2011 http://www.mosc.my/)
+%
+% http://liantze.penguinattack.org/latextypesetting.html
+%
+% This work is licensed under a Creative Commons Attribution-NonCommercial-
+% ShareAlike 3.0 Unported License (http://creativecommons.org/licenses/by-nc-sa/3.0/).
+%
+
+%\pdfminorversion=5
+%\pdfobjcompresslevel=3
+%\pdfcompresslevel=9
+
+% Full presentation (with overlays, animated bullet items etc)
+\documentclass[xcolor={x11names,svgnames,dvipsnames}]{beamer}
+
+% Transparency mode (no overlays)
+%\documentclass[xcolor={x11names,svgnames,dvipsnames},trans]{beamer}
+
+% n-up handout mode
+% \documentclass[xcolor={x11names,svgnames,dvipsnames},handout]{beamer}
+
+\usepackage{pgfpages}
+\usepackage{qrcode}
+\usepackage{animate}
+\usepackage[hungarian]{babel}
+
+%% Glossy pretty look for the presentation and transparency (w/o overlays and animations) versions!
+\mode<beamer|trans>{
+\useoutertheme[glossy]{wuerzburg}
+\useinnertheme[shadow,outline]{chamfered}
+\usecolortheme{shark}
+}
+\setbeamertemplate{navigation symbols}{}
+%\setbeamertemplate{frametitle continuation}[from second][(cont'd)]
+%\setbeamertemplate{frametitle continuation}[from second][(folytat\'as)]
+\setbeamertemplate{frametitle continuation}[from second][]
+\usefonttheme[stillsansseriftext,stillsansserifsmall]{serif}
+
+
+
+%% Save up on ink for the 4-up handouts
+\mode<handout>{
+    \useoutertheme{wuerzburg}
+    \useinnertheme[outline]{chamfered}
+    %\pgfpagesuselayout{4 on 1}[a4paper, landscape, border shrink=10mm]
+    \pgfpagesuselayout{2 on 1}[a4paper, border shrink=10mm]
+    \pgfpageslogicalpageoptions{1}{border code=\pgfstroke}
+    \pgfpageslogicalpageoptions{2}{border code=\pgfstroke}
+    %\pgfpageslogicalpageoptions{3}{border code=\pgfstroke}
+    %\pgfpageslogicalpageoptions{4}{border code=\pgfstroke}
+    \setbeamercolor{structure}{fg=black}
+    \setbeamercolor{alerted text}{fg=black}
+}
+
+\mode<presentation>{\AtBeginSection[]{%
+    \begin{frame}
+    \frametitle{Tartalom}
+    \tableofcontents[currentsection]
+    \end{frame}}
+}
+
+\usepackage[T1,safe]{tipa}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[scaled=.77]{beramono}
+\SetTracking{encoding=*}{-39}
+
+%\usepackage{algorithm2e,algorithmic}
+%Use them together
+\usepackage{marvosym}
+\usepackage{tikzsymbols}
+
+\usepackage{keystroke,fontawesome,phaistos,linearA,rubikcube}
+%\usepackage{ifsym,simpsons}
+%http://latexcolor.com
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1}
+\definecolor{chocolate}{rgb}{0.48, 0.25, 0.0}
+\definecolor{cerulean}{rgb}{0.0, 0.48, 0.65}
+
+
+\definecolor{blue(ncs)}{rgb}{0.0, 0.53, 0.74}
+\definecolor{darkolivegreen}{rgb}{0.33, 0.42, 0.18} % #556B2F
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\newenvironment<>{feladat}[1]{%
+  \setbeamercolor{block title}{fg=white,bg=ao(english)}%
+  \begin{block}#2{#1}}{\vspace{-0.7em}\end{block}}
+
+%numbering figures
+\setbeamertemplate{caption}[numbered]
+
+\usepackage{caption}
+    \captionsetup[figure]{labelsep=space}
+    \captionsetup[table]{labelsep=space}
+    %\renewcommand{\thefigure}{\Roman{figure}}
+
+\usepackage{pdfpages}
+
+\usepackage{relsize,tabularx}
+\usepackage{hologo,textcomp}
+\usepackage{comment}
+\usepackage[skaknew]{chessboard,skak}
+\usepackage{multicol,booktabs}
+
+\usepackage{listings}
+\lstset{
+    upquote,
+    keepspaces=true,
+    columns=spaceflexible,
+    basicstyle=\ttfamily\scriptsize,%
+    breaklines=true,
+    breakindent=0pt,
+    xleftmargin=0pt,
+    xrightmargin=6pt,
+    language=[LaTeX]TeX,
+    texcsstyle=*\bfseries\color{chocolate},
+    commentstyle=\sffamily\itshape\smaller\color{SeaGreen4},
+    emphstyle=\bfseries\color{cerulean},escapechar={:},
+    emphstyle={[2]{\bfseries\color{Sienna2}}},
+    postbreak=\mbox{{\smaller\color{gray}$\hookrightarrow$}},
+    basicstyle=\ttfamily\small,
+    framexbottommargin=-3em,
+    moretexcs={maketitle,subsection,tableofcontents,includegraphics,graphicspath, fancyhead,fancyfoot,fancyhf,rfoot,cfoot,lfoot,rhead,chead,lhead,blindtext,Vertex,
+toprule,bottomrule,STautoround},
+%to handle  Hungarian vowels...
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ő}{{\H{o}}}1 {ű}{{\H{u}}}1 {ö}{{\"{o}}}1 {ü}{{\"{u}}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {Ő}{{\H{O}}}1 {Ű}{{\H{U}}}1 {Ö}{{\"{O}}}1 {Ü}{{\"{Ü}}}1
+}
+
+\mode<handout>{
+   \lstset{
+   texcsstyle=*\bfseries, commentstyle=\sffamily\itshape\smaller,
+   emphstyle=\bfseries,escapechar={:},
+   emphstyle={[2]{\bfseries}},
+   emphstyle={[3]{\bfseries}},
+   postbreak=\mbox{{\smaller$\hookrightarrow$}}
+   }
+}
+
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+\usetikzlibrary{shapes,arrows,positioning,matrix,chains,fit}
+\usetikzlibrary{backgrounds}
+
+\usepackage{multicol,multirow}
+\usepackage[version=3]{mhchem}
+\usepackage{chemfig}
+\usepackage{expex,qtree}
+\usepackage{texshade}
+\usepackage[detect-all]{siunitx}
+\usepackage[siunitx]{circuitikz}
+\usepackage{smartdiagram}
+\usepackage{bytefield}
+% \usepackage{pstricks,pst-barcode}
+% \usepackage{auto-pst-pdf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{cwpuzzle}
+\usepackage{gchords,guitar}
+\usepackage{spreadtab}
+\usepackage{ccicons}
+\usepackage{marvosym}
+\usepackage{upgreek}
+\usepackage{adforn}
+\graphicspath{{./figures/}}
+% \ifpdf
+\pdfmapfile{+webo.map}
+% \fi
+\newcommand{\wb}[1]{{\usefont{U}{webo}{xl}{n}#1}}
+\usepackage{bookmark}
+
+\setlength\fboxsep{0pt}
+
+\author[LianTze Lim, Griechisch Erika]{
+    Eredeti: LianTze Lim (Ph.D.)\\
+    Fordítás és kiegészítések: Griechisch Erika
+    }
+\title[\LaTeX: nem csak cikkekhez vagy dolgozatokhoz]{\LARGE \LaTeX: nem csak cikkekhez vagy dolgozatokhoz}
+%\subtitle{\hrulefill\ \adforn{57}\quad\adforn{11}\quad\adforn{29}\ \hrulefill}
+\subtitle{\large\hrulefill\ \adforn{64}\quad\adforn{11}\quad\adforn{36}\ \hrulefill}
+\date[\ccbyncsa]{\ccbyncsa\ }
+\titlegraphic{
+    \includegraphics[width=.3\textwidth]{TFZsuperellipse-crop}\\
+    \tiny Illusztrációk: Duane Bibby
+}
+
+\hypersetup{%
+    pdfauthor={LianTze Lim}, %% the "author" field from above includes garbage code...
+    pdfkeywords={latex,features,publicity,preview}
+}
+
+\begin{document}
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Tartalom}
+\tableofcontents
+\end{frame}
+
+
+%\include{aboutmeErika}
+
+\include{intro}
+
+\include{document}
+
+\section{Mire képes a \LaTeX{}?}
+\include{domain}
+
+\subsection*{Nagyvonalakban}
+
+\begin{frame}
+\frametitle{Főbb jellemzők}
+\begin{itemize}
+\item<+-> \LaTeX
+    \begin {itemize}
+    \item dokumentum előkészítő rendszer
+    \item professzionális minőségű betűszedéssel
+    \end{itemize}
+\item<+-> Előfordulás
+    \begin{itemize}
+    \item Akadémia: cikkek, dolgozatok, könyvek
+    \item Dedikált dokumentumtípusok
+    \item Domain-specifikus anyagok
+    \end{itemize}
+\item<+-> Használati lehetőségek % scenario
+    \begin{itemize}
+%   \item % Direct authoring %TODO ez mi?
+    \item Automatikus generálás (szkriptekben)
+    \item Alkalmazások  back-end-je lehet
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\section*{Köszönet}
+\begin{frame}
+\centering
+
+\includegraphics[width=0.6\textwidth]{multiling-TQ}
+\\
+{\footnotesize Forrás: \url{https://www.overleaf.com/latex/examples/multilingual-thank-you/wjmrnnqkstyf}}
+
+\bigskip
+ {\huge Kérdések?\par}\vskip1em
+ {\large\href{mailto:griechisch.erika@gmail.com}{griechisch.erika@gmail.com}
+ \par}
+
+% {\huge Questions?\par}\vskip1em
+% {\large\url{liantze@gmail.com}
+% \\\url{support@overleaf.com}
+% \\\url{http://liantze.penguinattack.org}
+% \\\url{http://latex-my.blogspot.com}
+% \par}
+\end{frame}
+
+\begin{frame}
+\frametitle{Letöltenéd ennek a prezentációnak a forrását?}
+\centering
+\begin{tabular}{cm{20mm}c}
+    angol   && magyar \\
+    \qrcode[height=.3\textheight]{https://www.overleaf.com/articles/latex-more-than-just-academic-papers-and-theses/cyfvvyfrpmyn}
+    &&
+    \qrcode[height=.3\textheight]{https://www.overleaf.com/read/xwnkwqznvbxz}
+\end{tabular}
+\end{frame}
+
+
+
+
+\end{document}

@@ -1,0 +1,153 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+%===================================================
+%= normalsize = 10pt,11pt,12pt 三个选项
+%= onecolumn,twocolumn 单双栏设置
+%===================================================
+
+%====== 导言区 =====%
+
+%=========== 自定义页边距 ===============%
+\usepackage{geometry}
+\geometry{left = 1cm, right = 1cm, top = 1cm, bottom = 0.7cm}
+
+%========== math symbol ==============%
+\usepackage{amsmath,amsfonts,amssymb}
+% \usepackage{mathrsfs,calrsfs}   %花体字母支持
+
+%============ other support ==============%
+\usepackage{url}    %超链接支持
+\usepackage{ctex}   %中文支持，推荐使用 xelatex 编译
+\usepackage{enumerate}    %有序列表支持
+\usepackage{graphicx}   %插图支持
+\usepackage{tikz}   %tikz画图支持
+\usepackage{xcolor}   %色彩支持
+
+%================= 自定义区 ====================%
+\linespread{1}    %行间距
+% \parskip=10pt   %段间距
+
+%================= 导入自定义命令 ===============%
+\input defs.tex
+
+\begin{document}
+
+\section{Graph Algo}
+
+\begin{itemize}
+  \item 邻接矩阵：空间复杂度 \(O(n^2)\)，判断(u,v)是否存在一条边需要常数时间，遍历所有边耗时 \(\Theta(n^2)\).
+  \item 邻接表：空间复杂度 \(O(m+n)\)，判断(u,v)是否存在一条边需要 \(O(deg(u))\)时间，遍历所有边耗时 \(\Theta(m+n)\).
+  \item The distance between two nodes s and t is the length of the shortest path between them.
+  \item{定理：}For each i, \(L_i\) consists of all nodes at distance exactly i from s. There is a path from s to t \(\iff\) t appears in some layer.
+  \item{Porperty: }Let (x, y) be an edge of G. Then the level of x and y differ by at most 1.
+  \item{BFS \& DFS: }
+    % \begin{figure}[h]
+    %   \includegraphics[scale=0.2]{cs2.png}
+    %   \includegraphics[scale=0.2]{cs3.png}
+    % \end{figure}
+  \item{Theorem: }BFS/DFS runs in \(O(m + n)\) time if the graph is given by its adjacency list representation.
+  \item Lemma. If a graph G is bipartite, it cannot contain an odd length cycle.
+  \item{
+    Lemma. Let G be a connected graph, and let \(L_0,\cdots,L_k\) be the layers produced by BFS starting at node s. Exactly one of the following holds.
+    \begin{itemize}
+      \item No edge of G joins two nodes of the same layer, and G is bipartite.
+      \item An edge of G joins two nodes of the same layer, and G contains an odd-length cycle (and hence is not bipartite).
+    \end{itemize}
+  }
+  \item Def. An DAG is a directed graph that contains no directed cycles.
+  \item Def. A topological order of a directed graph G = (V, E) is an ordering of its nodes as \(v_1,v_2,\cdots,v_n\) so that for every edge \((v_i,v_j)\) we have \(i<j\).
+  \item{Theorem. }G is a DAG. \(iff\) G has a topolical ordering.
+  \item Lemma. If G is a DAG, then G has a node with no incoming edges.
+  \item 找出G的入度为0的点，去掉它，在去掉后的图里再找入度为0的点。如此往复，去掉的节点顺序组成一个拓扑排序。复杂度为 \(O(m+n)\).
+  \item 强连通性：正反BFS判断。
+\end{itemize}
+
+\section{Greedy Algo}
+\begin{itemize}
+  \item Interval Scheduling: Sort job by finsh time. Then greedy. Greedy is optimal.
+  \begin{itemize}
+    \item Assume greedy is not optimal, and let's see what happens.
+    \item Let \(i_1,\cdots,i_k\) denote set of jobs selected by greedy.
+    \item Let \(j_1,\cdots,j_m\) denote set of jobs in the optimal solution with \(i_1=j_1,\cdots,i_r=j_r\) for the largest possible value of r.
+    \item 在这一步贪心解不必其他解差。故最优。
+  \end{itemize}
+  \item Interval Partitioning:
+  \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{IntervalPartitioning.png}
+  \end{figure}
+  \begin{itemize}
+    \item Let d = number of classrooms that the greedy algorithm allocates.
+    \item Classroom d is opened because we needed to schedule a job, say j, that is incompatible with all d-1 other classrooms.
+    \item Since we sorted by start time, all these incompatibilities are caused by lectures that start no later than \(s_j\).
+    \item Thus, we have d lectures overlapping at time \(s_j + \epsilon\).
+    \item Key observation \(\implies\) all schedules use \(\ge\) d classrooms.
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{dijkstra.png}
+  \end{figure}
+  \item Proof Skills:
+    \begin{itemize}
+      \item Greedy algorithm stays ahead. Show that after each step of the greedy algorithm, its solution is at least as good as any other algorithm's.
+      \item Structural. Discover a simple "structural" bound asserting that every possible solution must have a certain value. Then show that your algorithm always achieves this bound.
+      \item Exchange argument. Gradually transform any solution to the one found by the greedy algorithm without hurting its quality.
+    \end{itemize}
+\end{itemize}
+
+\section{Divide and Conquer}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{karatsuba.png}
+    \includegraphics[scale=0.2]{matrixMultiply.png}
+\end{figure}
+\begin{itemize}
+  \item Merge sort: Divide a sequence into two of same size
+  \item Counting inversionn: Extension of mergesort
+  \item Closest Pair of Points: Vertically divide the space
+  \item Fast Fourier Transform: Divide a polynomial into two with even and odd powers
+\end{itemize}
+
+\section{Dynamic Programming}
+\begin{itemize}
+  \item{\textbf{Divide and Conquer}}: Break up a problem into a few sub-problems, solve each sub-problem independently and recursively, and combine solution to sub-problems to form solution to original problem.
+  \item{\textbf{Dynamic Programming}}: Break up a problem into a series of overlapping sub-problems, and build up solutions to larger and larger sub-problems.
+  \item Weighted Interval Scheduling: Memoized version of algorithm takes \(O(n\log{n})\) time. 排序 \(O(n)\)，计算 \(p(j)\) 耗时 \(O(n)\) after sorting by start time，函数调用 \(O(n)\).
+  \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{weightedIS.png}
+    \caption{Weighted Interval Scheduling}
+    \includegraphics[scale=0.2]{knapspack.png}
+    \caption{Knapspack}
+    \includegraphics[scale=0.2]{sequenceAlign.png}
+    \caption{Sequence Alignment}
+    \includegraphics[scale=0.2]{bellman-ford.png}
+    \caption{Bellman-Ford Algo}
+  \end{figure}
+  \item Kanpspack Problem: \(O(nW)\) 伪多项式，因为问题规模随着  \(\log_2{W}\) 线性增长。
+  \item 负环
+  \begin{itemize}
+    \item If OPT(n,v) = OPT(n-1,v) for all v, then there is no negative cycle with a path to t.
+    \item If OPT(n,v) < OPT(n-1,v) for some node v, then (any) shortest path from v to t contains a cycle W. Moreover W has negative cost.
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{negativeCycle.png}
+  \end{figure}
+  \end{itemize}
+\end{itemize}
+
+\section{Max Flow}
+\begin{itemize}
+  \item An s-t cut is a partition (A, B) of V with \(s \in A\) and \(t \in B\).
+  \item Flow value lemma. Let f be any flow, and let (A, B) be any s-t cut. Then, the net flow sent across the cut is equal to the amount leaving s.
+  \item Weak duality. Let f be any flow, and let (A, B) be any s-t cut. Then the value of the flow is at most the capacity of the cut.
+  \item Augmenting path theorem. Flow f is a max flow iff there are no augmenting paths.
+  \item Max-flow min-cut theorem. The value of the max flow is equal to the value of the min cut.
+  \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{property2tui3.png}
+    \includegraphics[scale=0.2]{min-cut.png}
+  \end{figure}
+\end{itemize}
+
+
+\end{document}

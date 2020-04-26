@@ -1,0 +1,28 @@
+%        File: chinese_test.tex
+%     Created: 六 4月 04 11:00 下午 2020 C
+% Last Change: 六 4月 04 11:00 下午 2020 C
+%
+\documentclass[12pt]{ctexart}
+\usepackage{utils/zhfont}
+\begin{document}
+让我们来一点you know mixture\textbf{中文吧}\songti{你好，我宋体}
+\heiti{你好，我黑体}
+\fangsong{你好，我仿宋}
+\kaiti{你好，我楷体}
+\emph{你好，我加强}
+$$
+e = mc^2
+$$
+
+\ifdefined\zhfontpath
+  \message{\string\zhfontpath\space is defined}%
+\else
+  \message{no command \string\zhfontpath}%
+\fi
+%
+\ifcsname zhfontpath\endcsname
+  \message{\string\zhfontpath\space is defined}%
+\else
+  \message{no command \string\zhfontpath}%
+\fi
+\end{document}
