@@ -17,13 +17,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{hyperref}
 \hypersetup{
-  %bookmarksnumbered,
+  bookmarksnumbered,
   colorlinks,
   linkcolor={darkred},
   urlcolor={darkred},
   filecolor={darkred},
   citecolor={black},
 }
+\urlstyle{rm} % Use roman series for link text.
 
 \RequirePackage[open,openlevel=0,atend]{bookmark}
 
@@ -43,15 +44,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{geometry}
 \geometry{
-  textwidth=138mm,
-  textheight=215mm,
+  % textwidth=138mm,  % duplicated with `left=27mm`
+  % textheight=215mm,
   left=27mm,
-  %% or
-  %% inner=23mm,
   right=27mm,
-  %% or
-  %% outer=18mm,
-  top=25.4mm, bottom=25.4mm,
+  top=25.4mm,
+  bottom=25.4mm,
   headheight=2.17cm,
   headsep=4mm,
   footskip=12mm,
@@ -71,7 +69,7 @@
 
 \setmainfont{Linux Libertine O}
 \setsansfont{Linux Biolinum O}
-\setmonofont{Source Code Pro}
+\setmonofont{Consolas}
 %\setmathfont[AutoFakeBold]{Linux Libertine O}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

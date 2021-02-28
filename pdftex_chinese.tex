@@ -1,0 +1,32 @@
+%        File: chinese_test.tex
+%     Created: 六 4月 04 11:00 下午 2020 C
+% Last Change: 六 4月 04 11:00 下午 2020 C
+%
+% see: https://www.cnblogs.com/dezheng/p/3874434.html
+\documentclass[UTF8]{article}
+%\usepackage{ctex}
+\usepackage{CJKutf8}
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+让我们来一点you know mixture\textbf{中文吧}{你好，我宋体}
+\kaishu{你好，我黑体}
+{你好，我仿宋}
+{你好，我楷体}
+\emph{你好，我加强}
+\end{CJK}
+$$
+e = mc^2
+$$
+
+\ifdefined\zhfontpath
+  \message{\string\zhfontpath\space is defined}%
+\else
+  \message{no command \string\zhfontpath}%
+\fi
+%
+\ifcsname zhfontpath\endcsname
+  \message{\string\zhfontpath\space is defined}%
+\else
+  \message{no command \string\zhfontpath}%
+\fi
+\end{document}

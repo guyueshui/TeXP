@@ -3,23 +3,38 @@
 % Last Change: 三 12月 18 08:00 下午 2019 C
 %
 \documentclass{./utils/mydoc}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
 
 \input utils/defs.tex
 \setlength{\parskip}{1em}
+\setlength{\parindent}{0pt} % disable paragraph indent globally
+\numberwithin{equation}{section} % numbering equation with section number
 
 \title{\bfseries \sffamily Probabilty Notes}
 \author{Yychi Fyu \\ @SIST, ShanghaiTech University}
 \date{\today}
 
+% see: amsthm doc
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollray}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition} % disable numbering
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
 \begin{document}
 \maketitle
 
-Odds: the \emph{odds} of an event $A$ are
+\begin{definition}[Odds]
+The \emph{odds} of an event $A$ are
 \[
   \odds(A) = P(A)/P(A^c).
 \]
-For example, if $P(A) = 2/3$, we say the odds in favor of $A$ are 2 to 1. 
+\end{definition}
+For\cite{blitzstein2019introduction} example, if $P(A) = 2/3$, we say the odds in favor of $A$ are 2 to 1. 
 (This is sometimes written as 2 : 1, and is sometimes stated as 1 to 2 odds
 against $A$; care is needed since some sources do not explicitly state whether
 they are referring to odds in favor or odds against an event). Of course we 
@@ -39,25 +54,23 @@ which is the inverse of sigmoid function
 You must have met these in logistic regression. Both odds and logits are
 increasing as $p$ increases.
 
-(Odds form of Bayes’ rule): For any events $A$ and $B$ with positive
-probabilities, the odds of $A$ after conditioning on $B$ are
+\begin{definition}[Odds form of Bayes’ rule]
+  For any events $A$ and $B$ with positive
+  probabilities, the odds of $A$ after conditioning on $B$ are
 \[
   \frac{P(A|B)}{P(A^c|B)} = \frac{P(B|A)}{P(B|A^c)}\frac{P(A)}{P(A^c)}.
 \]
+\end{definition}
 In words, this says that the \emph{posterior odds} $P(A|B)/P(A^c|B)$ are equal
 to the \emph{prior odds} $P(A)/P(A^c)$ times the factor $P(B|A)/P(B|A^c)$, 
 which is known in statistics as the \emph{likelihood ratio}.
 
-Superise: 
-The \emph{surprise} of learning that an event with probability $p$ happened is 
-defined as $\log_2 (1/p)$, measured in a unit called bits. Low-probability 
-events have high surprise, while an event with probability 1 has zero surprise. 
-The log is there so that if we observe two independent events $A$ and $B$, the 
-total surprise is the same as the surprise from observing $A \cap B$. The log 
-is base 2 so that if we learn that an event with probability $1/2$ happened, 
-the surprise is 1, which corresponds to having received 1 bit of information.
+\begin{definition}[Surprise]
+  The \emph{surprise} of learning that an event with probability $p$ happened is  defined as $\log_2 (1/p)$, measured in a unit called bits. 
+\end{definition}
+Low-probability events have high surprise, while an event with probability 1 has zero surprise. The log is there so that if we observe two independent events $A$ and $B$, the total surprise is the same as the surprise from observing $A \cap B$. The log is base 2 so that if we learn that an event with probability $1/2$ happened, the surprise is 1, which corresponds to having received 1 bit of information.
 
-Entropy:
+\begin{definition}[Entropy]
 Let $X$ be a discrete r.v. whose distinct possible values are 
 $a_1, a_2, \dots,  a_n$, with probabilities $p_1, p_2,\dots, p_n$ respectively 
 (so $p_1 + p_2 + \cdots + p_n = 1$). The \emph{entropy} of $X$ is defined to 
@@ -65,23 +78,115 @@ be the average surprise of learning the value of $X$:
 \[
   H(X) = \sum_{j=1}^n p_j \log_2(1/p_j).
 \]
+\end{definition}
 
-Kullback-Leibler divergence: Let $\mathbf{p} = (p_1, \dots, p_n)$ and 
-$\mathbf{r} = (r_1, \dots, r_n)$ be two probability vectors (so each is 
-nonnegative and sums to 1). Think of each as a possible PMF for a random 
-variable whose support consists of $n$ distinct values. The 
-\emph{Kullback-Leibler divergence} between $\mathbf{p}$ and $\mathbf{r}$ is 
-defined as
+\begin{definition}[Kullback-Leibler divergence]
+  Let $\mathbf{p} = (p_1, \dots, p_n)$ and $\mathbf{r} = (r_1, \dots, r_n)$ be two probability vectors (so each is nonnegative and sums to 1). Think of each as a possible PMF for a random variable whose support consists of $n$ distinct values. The \emph{Kullback-Leibler divergence} between $\mathbf{p}$ and $\mathbf{r}$ is defined as
 \[
   D(\mathbf{p}, \mathbf{r}) = \sum_{j=1}^n p_j \log_2 (1 / r_j) -
     \sum_{j=1}^n p_j \log_2 (1 / p_j).
 \]
+\end{definition}
 This is the difference between the average surprise we will experience when the
 actual probabilities are $\mathbf{p}$ but we are instead working with 
 $\mathbf{r}$ (for example, if $\mathbf{p}$ is unknown and $\mathbf{r}$ is our 
 current guess for $\mathbf{p}$), and our average surprise when we work with 
 $\mathbf{p}$.
 
+\section{Probabilty}
+
+\subsection{Bounds on tail probability}
+
+\begin{theorem}[Markov's inequality] \label{thm:markov-inequality}
+For any r.v. $X$ and constant $a > 0$,
+\begin{equation}
+  P(|X| \ge a) \le \frac{E|X|}{a}.
+  % do you know \ell?
+\end{equation}
+\end{theorem}
+\begin{proof}
+  Let $Y = \frac{|X|}{a}$. We need to show that $P(Y\ge 1) \le E(Y)$. Note that
+  \[ I(Y \ge 1) \le Y, \]
+  since if $I(Y \ge 1) = 0$ then $Y \ge 0$, and if $I(Y \ge 1) = 1$ then $Y \ge 1$ (because the indicator says so). Taking the expectation of both sides, we have Markov’s inequality.
+\end{proof}
+
+
+\begin{theorem}[Chebyshev's inequality]
+  Let $X$ have mean $\mu$ and variance $\sigma^2$. Then for any $a > 0$,
+  \begin{equation}
+    P(|X-\mu| \ge a) \le \frac{\sigma^2}{a^2}.
+  \end{equation}
+\end{theorem}
+\begin{proof}[Proof of Chebyshev's inequality]
+  By Markov's inequality (Theorem~\ref{thm:markov-inequality}),
+  \[
+    P(|X-\mu|\ge a) = P((X-\mu)^2 \ge a^2) 
+    \le \frac{E(X-\mu)^2}{a^2} = \frac{\sigma^2}{a^2}.
+  \]
+\end{proof}
+
+\begin{theorem}[Chernoff bound]
+  For any r.v. $X$ and constants $a > 0$ and $t>0$,
+  \begin{equation}
+    P(X\ge a) \le \frac{E(e^{tX})}{e^{ta}}.
+  \end{equation}
+\end{theorem}
+\begin{proof}
+The transformation $g$ with $g(x) = e^{tx}$ is invertible and strictly increasing. So by Markov's inequality, we have
+\[
+P(X\ge a) = P(e^{tX} \ge e^{ta}) \le \frac{E(e^{tX})}{e^{ta}}.
+\]
+\end{proof}
+
+
+\subsection{Law of large numbers}
+Assume we have i.i.d. $X_1, X_2, X_3, \dots$  with finite mean $\mu$ and finite variance $\sigma^2$. For all positive integers $n$, let
+\[
+\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}
+\]
+be the \emph{sample mean} of $X_1$ through $X_n$. The sample mean is itself an r.v., with mean $\mu$ and variance $\sigma^2/n$:
+
+\[
+\begin{split}
+E(\bar{X}_n) &= \frac{1}{n} E\left(\sum_{i=1}^n X_i\right) 
+= \frac{1}{n}\sum_{i=1}^n E(X_i) = \mu, \\
+\text{Var}(\bar{X}_n) &= \frac{1}{n^2} \text{Var}\left(\sum_{i=1}^n X_i\right) 
+= \frac{1}{n^2}\sum_{i=1}^n \text{Var}(X_i) = \frac{\sigma^2}{n}.
+\end{split}
+\]
+
+\begin{theorem}[Strong law of large numbers]
+  The sample mean $\bar{X}_n$ converges to the true mean $\mu$ pointwise as $n \to \infty$, with probability 1. In other words,
+  \begin{equation}
+  P(\lim_{n\to\infty} \bar{X}_n = \mu) = 1, \text{ or }
+  \bar{X}_n \overset{a.s.}{\longrightarrow} \mu.
+  \end{equation}
+\end{theorem}
+
+\begin{theorem}[Weak law of large numbers]
+  For all $\epsilon >0$, $P(|\bar{X}_n-\mu|>\epsilon) \to 0$ as $n\to\infty$. (This is called \emph{convergence in probability}.) In other words,
+  \begin{equation}
+    \lim_{n\to\infty}P(\bar{X}_n = \mu) = 1.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Fix $\epsilon >0$, by Chebyshev's inequality,
+  \[
+  P(|\bar{X}_n-\mu|>\epsilon) \le \frac{\sigma^2}{n\epsilon^2}.
+  \]
+  As $n\to\infty$, the right-hand side goes to 0, ans so must the left-hand side.
+\end{proof}
+
+\section{Information theory}
+
+hi here, /usr/bin/locale, seems good haha, are you kidding me? yes i can
+
+% References.
+% see https://www.overleaf.com/learn/latex/bibtex_bibliography_styles
+% for more styles.
+\bibliographystyle{ieeetr}
+\bibliography{common_ref.bib}
 \end{document}
 
 
