@@ -1,0 +1,68 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{zh_CN-Adobefonts_internal}[2015/05/25 zh_CN-Adobefonts_internal Package]
+
+\RequirePackage{xeCJK}
+
+% https://github.com/boathit/CTEX/blob/master/texmf/tex/latex/ctex/fontset/ctex-xecjk-adobefonts.def
+% ctex-xecjk-adobefonts.def: Adobe 的 xeCJK 字体设置，为 Adobe 的四套字体
+% vim:ft=tex
+
+\setCJKmainfont[
+    Path = fonts/zh_cn/ ,
+    BoldFont = HYQiHei-70S.ttf ,
+    ItalicFont = HYKaiTiS.ttf ,
+    SmallCapsFont = HYQiHei-70S.ttf
+  ]{HYQiHei-45S.ttf}
+%\setCJKsansfont{Adobe Heiti Std}
+%\setCJKmonofont{Adobe Fangsong Std}
+
+%% \setCJKmainfont[
+%%     Path = /home/yychi/Documents/FontsCollection/zh_cn/,
+%%     BoldFont = 方正小标宋_GBK.ttf,
+%%     ItalicFont = 方正仿宋_GBK.ttf,
+%%     SmallCapsFont = 方正黑体_GBK.ttf
+%%   ]{方正书宋_GBK.ttf}
+%% 
+%% \setCJKsansfont
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {方正黑体_GBK.ttf}
+%% 
+%% \setCJKmonofont
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {方正中等线_GBK.ttf}
+%% 
+%% \setCJKfamilyfont{fzxbs}
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {FZXBSJW.TTF}
+%% \newcommand{\songti}{\CJKfamily{fzxbs}}
+%% 
+%% \setCJKfamilyfont{fzhei}
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {方正黑体_GBK.ttf}
+%% \newcommand{\heiti}{\CJKfamily{fzhei}}
+%% 
+%% \setCJKfamilyfont{fzkai}
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {方正楷体_GBK.ttf}
+%% \newcommand{\kaiti}{\CJKfamily{fzkai}}
+%% 
+%% \setCJKfamilyfont{fzfs}
+%% [Path = /home/yychi/Documents/FontsCollection/zh_cn/]
+%% {方正仿宋_GBK.ttf}
+%% \newcommand{\fangsong}{\CJKfamily{fzfs}}
+
+%\setCJKfamilyfont{zhsong}{HYZhongSongS}
+%\setCJKfamilyfont{zhhei}{WenQuanYi Micro Hei}
+%\setCJKfamilyfont{zhfs}{Adobe Fangsong Std}
+%\setCJKfamilyfont{zhkai}{Adobe Kaiti Std}
+%\setCJKfamilyfont{zhli}{LiSu}
+%\setCJKfamilyfont{zhyou}{YouYuan}
+
+%\newcommand*{\songti}{\CJKfamily{zhsong}} % 宋体
+%\newcommand*{\heiti}{\CJKfamily{zhhei}}   % 黑体
+%\newcommand*{\kaishu}{\CJKfamily{zhkai}}  % 楷书
+%\newcommand*{\fangsong}{\CJKfamily{zhfs}} % 仿宋
+%\newcommand*{\lishu}{\CJKfamily{zhli}}    % 隶书
+%\newcommand*{\youyuan}{\CJKfamily{zhyou}} % 幼圆
+
+\endinput
