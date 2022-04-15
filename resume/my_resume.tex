@@ -1,0 +1,103 @@
+% !TEX program = xelatex
+\documentclass{resume}
+%\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
+%\usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
+\usepackage[typography]{../utils/zhfont}
+
+% set pdf metadata
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={蔡和章的简历},
+  pdfauthor={蔡和章},
+  pdfsubject={简历},
+  pdfkeywords={蔡和章}
+}
+
+\begin{document}
+\pagenumbering{gobble} % suppress displaying page number
+
+\name{\bf 蔡\ 和章}
+
+\basicInfo{
+    \email{mail@me.com} \textperiodcentered\ 
+    \phone{(+86) 123-4567-8900} \textperiodcentered\
+    \homepage[blog.me]{https://cnblogs.com}
+}
+
+\section{\faGraduationCap\ 教育背景}
+\datedsubsection{\textbf{五角场职业学院~} 上海}{2017.09 -- 2020.06}
+\textit{硕士}，信息与通信工程，GPA：3.53~/~4 \\[1pt]
+研究方向：机器学习、信息论
+
+\datedsubsection{\textbf{广埠屯家里蹲大学~} 湖北，武汉}{2013.09 -- 2017.06}
+\textit{理学学士}，信息与计算科学，GPA：3.721~/~5，专业排名：1~/~43
+
+% programming sicp SICP The learning progress of sicp is partially 
+% distributed on github. say some code \verb|int c++ iam Monaco| 
+% and \textbf{some bold text} \textbf{\textit{some bold italic}} 
+% \texttt{typeset} \textsf{Martel Sans} see \textsf{some 
+% \textsc{Procedure} sans Procedure and \textit{sans font} and 
+% \textbf{bolded sans}} \underline{this is underlined}
+
+\section{\faUsers\ 工作经历}
+\datedsubsection{\textbf{互联网大厂} ~杭州}{2020.08 -- 至今}
+\role{XX工作室，XX岗位}{在职期间干了XX大事，做了XX贡献。}
+\vspace{-4pt}
+\begin{itemize}
+  \item XX系统
+  \begin{itemize}
+    \item 解决了XX问题
+    \item 提升了XX性能
+    \item 实现了XX功能
+  \end{itemize}
+  \item 另一个XX系统
+  \begin{itemize}
+    \item 开发了XX框架
+    \item 解决了XX痛点
+  \end{itemize}
+  \item 其他XX模块
+\end{itemize}
+
+\section{\faBriefcase 实习经历}
+\datedsubsection{\textbf{游戏大厂} ~上海}{2019.07 -- 2019.09}
+\role{服务器引擎部，游戏开发实习生}{学习了XX技能。}
+
+\datedsubsection{\textbf{金融大厂} ~上海}{2019年夏}
+\role{软件开发实习生}{实习期间解决了XX问题。}
+
+\section{\faCogs\ 工作技能}
+\begin{itemize}[parsep=0.5ex]
+  \item 熟悉常用的算法和数据结构，如链表、栈和队列、树、堆等
+  \item 熟悉C++基本特性，熟悉STL，如顺序容器、泛型算法
+  \item 熟悉Python脚本语言，有相关开发经验
+  \item 熟悉常用的机器学习算法，如支持向量机、Logistic回归、人工神经网络、决策树、K-近邻法等
+  \item 熟悉常用的Linux命令，PC使用Linux系统已有3年多，有一定的Linux基础
+  \item 通过国家英语六级，有较好的英文阅读能力
+\end{itemize}
+
+% \section{\faCode\ 求职意向}
+% \begin{itemize}
+%   \item C++开发
+%   \item 数据挖掘、机器学习
+%   \item Linux运维
+% \end{itemize}
+
+% \section{\faHeartO\ 获奖及荣誉}
+% \begin{itemize}
+% \end{itemize}
+
+\section{~\faInfo~\ 其他信息}
+\begin{itemize}[parsep=0.5ex]
+  \item \datedline{基础信息论本科生助教}{2018年秋}
+  \item \datedline{国际会议志愿者}{2018.07}
+  \item \datedline{概率论与数理统计本科生助教}{2017年秋}
+  \item \datedline{校级三好学生}{2015.11}
+  \item \datedline{华中地区大学生数学建模邀请赛三等奖}{2015.05}
+  \item \datedline{国家励志奖学金}{2014, 2015}
+\end{itemize}
+
+%% Reference
+%\newpage
+%\bibliographystyle{IEEETran}
+%\bibliography{mycite}
+\end{document}
