@@ -4,6 +4,13 @@
 
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{zhfont}[General zh_CN font setting for tex.]
+\DeclareOption{typography}{\newcommand{\tp}{}}
+\DeclareOption*{%
+  \PackageWarning{zhfont}{Unknown option ‘\CurrentOption’}%
+}
+% IMPORTANT!!!, all declareoption should before this,
+% see: https://es.overleaf.com/learn/latex/Writing_your_own_class
+\ProcessOptions\relax
 
 % https://github.com/boathit/CTEX/blob/master/texmf/tex/latex/ctex/fontset/ctex-xecjk-adobefonts.def
 % ctex-xecjk-adobefonts.def: Adobe 的 xeCJK 字体设置，为 Adobe 的四套字体
@@ -15,14 +22,24 @@
 \fi
 
 \RequirePackage{xeCJK}
-\setCJKmainfont[
-    Path = \zhfontpath,
-    BoldFont = 方正小标宋_GBK.ttf,
-    ItalicFont = 方正仿宋_GBK.ttf
+\ifx\tp\undefined
+  \setCJKmainfont[
+        Path = \zhfontpath,
+        BoldFont = 方正小标宋_GBK.ttf,
+        ItalicFont = 方正仿宋_GBK.ttf
   ]{方正书宋_GBK.ttf}
+  \setCJKsansfont[Path=\zhfontpath]{方正黑体_GBK.ttf}
+  \setCJKmonofont[Path=\zhfontpath]{方正中等线_GBK.ttf}
+\else
+  \setCJKmainfont[
+      Path = \zhfontpath zhuzi_old_mincho/,
+      BoldFont = FZFWZhuZiAOldMinchoB.TTF,
+      ItalicFont = FZFWZhuZGDLMCJW.TTF,
+    ]{FZFWZhuZiAOldMinchoR.TTF}
+  \setmainfont{EB Garamond}
+  %\setmonofont{Consolas}
+\fi
 
-\setCJKsansfont[Path=\zhfontpath]{方正黑体_GBK.ttf}
-\setCJKmonofont[Path=\zhfontpath]{方正中等线_GBK.ttf}
 
 %%% font alias
 \setCJKfamilyfont{fzxbs}[Path=\zhfontpath]{FZXBSJW.TTF}
