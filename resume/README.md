@@ -1,7 +1,7 @@
 NOTE
 ====
 
-This folder is a fork of [billryan/resume](https://github.com/billryan/resume), with some customizations (i.e., font config). For a simple markdown resume, visit [resume.md](resume.md).
+This folder is a fork of [billryan/resume](https://github.com/billryan/resume), with some customizations (i.e., font config). For a simple markdown resume, visit [resume.md](./resume.md/).
 
 # Résumé
 
