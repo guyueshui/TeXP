@@ -1,0 +1,4 @@
+[submodule "resume/resume.md"]
+	path = resume/resume.md
+	url = https://github.com/guyueshui/resume.md.git
+	branch = mycv
