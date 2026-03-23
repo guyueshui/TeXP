@@ -2,3 +2,6 @@
 	path = resume.md
 	url = https://github.com/guyueshui/resume.md.git
 	branch = mycv
+[submodule "secret"]
+	path = secret
+	url = git@github.com:guyueshui/secret-tex.git

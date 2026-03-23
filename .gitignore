@@ -4,18 +4,13 @@
 ### LaTeX ###
 
 ## Privacy files:
-it
+archive
 paper
-Notes
-courses
 report_cn/*pre.*
 resume/yychi*
 resume/yukynn*
 yukynn*
 ucasthesis
-WeeklyReport
-周报
-毕设
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
